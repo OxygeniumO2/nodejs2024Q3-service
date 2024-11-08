@@ -1,3 +1,5 @@
+import { IsUUID } from 'class-validator';
+
 export interface User {
   id: string; // uuid v4
   login: string;
@@ -32,4 +34,9 @@ export interface Favorites {
   artists: string[]; // favorite artists ids
   albums: string[]; // favorite albums ids
   tracks: string[]; // favorite tracks ids
+}
+
+export class FindOneParams {
+  @IsUUID('4')
+  id: string;
 }

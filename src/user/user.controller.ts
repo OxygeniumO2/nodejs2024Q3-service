@@ -13,7 +13,7 @@ import {
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { FindOneParams } from './entities/user.entity';
+import { FindOneParams } from 'src/interfaces/interfaces';
 
 @Controller('user')
 export class UserController {
