@@ -1,17 +1,24 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateArtistDto } from './dto/create-artist.dto';
 import { UpdateArtistDto } from './dto/update-artist.dto';
-import { albums, artists, tracks } from 'src/db/db';
+import { albums, artists, favorites, tracks } from 'src/db/db';
 import { Artist } from 'src/interfaces/interfaces';
 import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class ArtistService {
-  private checkArtistExists(id: string) {
+  checkArtistExists(id: string, fromService = true) {
     const artist = artists.get(id);
 
     if (!artist) {
-      throw new HttpException('Artist not found', HttpStatus.NOT_FOUND);
+      if (fromService) {
+        throw new HttpException('Artist not found', HttpStatus.NOT_FOUND);
+      } else {
+        throw new HttpException(
+          'Artist does not exist',
+          HttpStatus.UNPROCESSABLE_ENTITY,
+        );
+      }
     }
 
     return artist;
@@ -64,6 +71,12 @@ export class ArtistService {
     albums.forEach((album) => {
       if (album.artistId === id) {
         album.artistId = null;
+      }
+    });
+
+    favorites.artists.forEach((artist) => {
+      if (artist.id === id) {
+        favorites.artists.delete(artist);
       }
     });
   }

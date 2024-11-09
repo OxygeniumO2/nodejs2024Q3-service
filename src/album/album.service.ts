@@ -1,17 +1,24 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateAlbumDto } from './dto/create-album.dto';
 import { UpdateAlbumDto } from './dto/update-album.dto';
-import { albums, tracks } from 'src/db/db';
+import { albums, favorites, tracks } from 'src/db/db';
 import { Album } from 'src/interfaces/interfaces';
 import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class AlbumService {
-  private checkAlbumExists(id: string) {
+  checkAlbumExists(id: string, fromService = true) {
     const album = albums.get(id);
 
     if (!album) {
-      throw new HttpException('Album not found', HttpStatus.NOT_FOUND);
+      if (fromService) {
+        throw new HttpException('Album not found', HttpStatus.NOT_FOUND);
+      } else {
+        throw new HttpException(
+          'Album does not exist',
+          HttpStatus.UNPROCESSABLE_ENTITY,
+        );
+      }
     }
 
     return album;
@@ -59,6 +66,12 @@ export class AlbumService {
     tracks.forEach((track) => {
       if (track.albumId === id) {
         track.albumId = null;
+      }
+    });
+
+    favorites.albums.forEach((album) => {
+      if (album.id === id) {
+        favorites.albums.delete(album);
       }
     });
   }
