@@ -27,8 +27,13 @@ This project is a simple RESTful API service built with Node.js. It allows manag
    ```bash
    cd nodejs2024Q3-service
    ```
+4. **Switch to branch "develop"**
 
-4. **Install dependencies**:
+   ```bash
+   git checkout develop
+   ```
+
+5. **Install dependencies**:
    ```bash
    npm install
    ```
