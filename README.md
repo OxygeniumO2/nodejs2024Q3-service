@@ -1,6 +1,6 @@
 # Home Library Service
 
-This project is a simple RESTful API service built with Node.js. It allows managing `User`, `Artists`, `Tracks`, `Albums`, and `Favorites` entities, providing full CRUD functionality and conforms to specific REST API requirements.
+This project is a simple RESTful API service built with Node.js. It allows managing `Users`, `Artists`, `Tracks`, `Albums`, and `Favorites` entities, providing full CRUD functionality and conforms to specific REST API requirements.
 
 ## Table of Contents
 
@@ -20,10 +20,15 @@ This project is a simple RESTful API service built with Node.js. It allows manag
 
    ```bash
    git clone https://github.com/OxygeniumO2/nodejs2024Q3-service
+   ```
+
+3. **Go to the newly appear folder**
+
+   ```bash
    cd nodejs2024Q3-service
    ```
 
-3. **Install dependencies**:
+4. **Install dependencies**:
    ```bash
    npm install
    ```
