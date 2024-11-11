@@ -3,11 +3,9 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
   Put,
-  Header,
   HttpCode,
 } from '@nestjs/common';
 import { UserService } from './user.service';
